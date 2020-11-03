@@ -1,4 +1,4 @@
-CREATE TABLE `table_view`.`work` (
+CREATE TABLE `work` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `doi` VARCHAR(125) NULL UNIQUE,
   `publisher` VARCHAR(255) NULL, 
@@ -10,9 +10,7 @@ CREATE TABLE `table_view`.`work` (
   PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `table_view`.`work` 
-ADD COLUMN `author` JSON NULL AFTER `issn`;
-ALTER TABLE `table_view`.`work` 
-ADD COLUMN `author` JSON NULL AFTER `issn`;
+ALTER TABLE `work` 
+ADD COLUMN `author` JSON NULL AFTER `issn`; 
 
  
