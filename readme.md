@@ -11,4 +11,5 @@ Table View is a simple System which allow user to download published works from 
 
 ##API
  - GET {URL}\api\getWorker.php  to get every work data  
- - Add Header PHP_AUTH_USER and PHP_AUTH_PW when sending request to Authenticate valid user, auth user  and password could found and change in config.php in root directory.
+ - This api use basic Auth to provide Authenticate to user, which requires username and password where could found and change in config.php in root directory.
+ 
