@@ -1,5 +1,6 @@
 
 <?php
+    require_once 'header.php';
     require_once 'config.php';
 ?>
 <?php
@@ -12,24 +13,67 @@ if(isset($_GET['doi_id'])){
 ?>
 <html>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     </head>
     <body>
-        <div id="app">
-            {{ info }}
+        <div id="app"> 
+                    <table class="table" id="myTaskTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">DOI</th> 
+                                <th scope="col">Date</th>
+                                <th scope="col">title</th> 
+                                <th scope="col">publisher</th>
+                            </tr>
+                        </thead>
+                        <tbody  id="myTaskTableBody">
+                        
+                                <tbody  id="myTaskTableBody" v-for="work in info">
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="table-content table_index">
+                                                    {{work.id}}
+                                                </div>
+                                            </th>
+                                            <td>
+                                                <div class="table-content">
+                                                    <a v-bind:href="'<?php echo $config['home_url']."/local_work_details.php?doi_id="; ?>' + work.doi">{{work.doi}}</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-content">
+                                                    {{work.date}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-content ">
+                                                    {{work.title}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-content ">
+                                                    {{work.publisher}}
+                                                </div>
+                                            </td>
+
+                                        </tr> 
+                                </tbody>
+                       
+                        </tbody>
+                    </table>
         </div>
+        
         <script>
             new Vue({
-                el: '#app',
+                el: '#myTaskTable',
                 data () {
-                  return {
-                    info: null
-                  }
+                    return {
+                      info: null
+                    }
                 },
                 mounted () {
                   axios
-                  
                     .get(
                         '<?php echo $config['home_url']."/api/getWorker.php"?>',{
                             auth: {
@@ -39,10 +83,8 @@ if(isset($_GET['doi_id'])){
                         }
                     )
                    // .get('http://api.crossref.org/works/<?php echo $doi?>')
-                    .then(response => (this.info = response))
+                    .then(response => (this.info = response.data))
                 }
               })
         </script>
-    </body>
-    
-</html>
+<?php require_once 'footer.php'?>

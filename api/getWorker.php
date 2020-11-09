@@ -1,7 +1,13 @@
 <?php
+    //headers
+    header('Access-Control-Allow-Origin');
+    header('Content-Type: application/json');
+?>
+<?php 
     require_once '../class/db.php';
     require_once '../config.php';
 ?>
+
 <?php 
     
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
@@ -10,7 +16,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     exit;
 } else {
     
-    if($_SERVER['PHP_AUTH_USER']!=$config['api_user'] && $_SERVER['PHP_AUTH_PW']!= $config['api_password']){
+if($_SERVER['PHP_AUTH_USER']!=$config['api_user'] && $_SERVER['PHP_AUTH_PW']!= $config['api_password'] ){
         $work_data = array(
            "status" => "500", 
            "message" => "Authenticate failure", 

@@ -12,6 +12,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
         <script src="main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
          <link rel="stylesheet" href="main.css" >
 
     </head>
@@ -29,7 +31,7 @@
                             <a class="nav-link" href="<?php echo $config['home_url']?>">HOME <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">LOCAL WORK LIST<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo $config['home_url']."/localworklist.php"?>">LOCAL WORK LIST<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
