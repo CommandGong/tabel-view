@@ -28,14 +28,14 @@ if($_SERVER['PHP_AUTH_USER']!=$config['api_user'] && $_SERVER['PHP_AUTH_PW']!= $
         if( $_GET['doi_id']!=""){
                 $database = new db($config_database); 
                 $database->connect(); 
-                $work_data = $database->getWorksByDoi($_GET['doi_id'])[0];
+                $work_data['works'] = $database->getWorksByDoi($_GET['doi_id'])[0];
                 $database->closeConnection(); 
             }
         }
         else{
             $database = new db($config_database); 
             $database->connect(); 
-            $work_data = $database->getWorks();
+            $work_data['works'] = $database->getWorks();
             $database->closeConnection(); 
         }
         $work_data["status"] = 200; 

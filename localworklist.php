@@ -16,8 +16,9 @@ if(isset($_GET['doi_id'])){
 
     </head>
     <body>
-        <div id="app"> 
+   
                     <table class="table" id="myTaskTable">
+                        
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -27,43 +28,40 @@ if(isset($_GET['doi_id'])){
                                 <th scope="col">publisher</th>
                             </tr>
                         </thead>
-                        <tbody  id="myTaskTableBody">
                         
-                                <tbody  id="myTaskTableBody" v-for="work in info">
-                                        <tr>
-                                            <th scope="row">
-                                                <div class="table-content table_index">
-                                                    {{work.id}}
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a v-bind:href="'<?php echo $config['home_url']."/local_work_details.php?doi_id="; ?>' + work.doi">{{work.doi}}</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    {{work.date}}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-content ">
-                                                    {{work.title}}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-content ">
-                                                    {{work.publisher}}
-                                                </div>
-                                            </td>
+                            <tbody  id="myTaskTableBody">
+                                    <tr  v-for="work in info">
+                                        <th scope="row">
+                                            <div class="table-content table_index">
+                                                {{work.id}}
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="table-content">
+                                                <a v-bind:href="'<?php echo $config['home_url']."/local_work_details.php?doi_id="; ?>' + work.doi">{{work.doi}}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="table-content">
+                                                {{work.date}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="table-content ">
+                                                {{work.title}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="table-content ">
+                                                {{work.publisher}}
+                                            </div>
+                                        </td>
 
-                                        </tr> 
-                                </tbody>
+                                    </tr> 
+                            </tbody>
                        
-                        </tbody>
                     </table>
-        </div>
-        
+      
         <script>
             new Vue({
                 el: '#myTaskTable',
@@ -82,8 +80,27 @@ if(isset($_GET['doi_id'])){
                             }
                         }
                     )
-                   // .get('http://api.crossref.org/works/<?php echo $doi?>')
-                    .then(response => (this.info = response.data))
+                    .then(response => (this.info = response.data.works))
+                }
+              })
+            new Vue({
+                el: '#app',
+                data () {
+                    return {
+                      info: null
+                    }
+                },
+                mounted () {
+                  axios
+                    .get(
+                        '<?php echo $config['home_url']."/api/getWorker.php"?>',{
+                            auth: {
+                                username:'<?php echo $config['api_user']?>',
+                                password:'<?php echo $config['api_password']?>'
+                            }
+                        }
+                    )
+                    .then(response => (this.info = response))
                 }
               })
         </script>
