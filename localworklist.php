@@ -65,7 +65,7 @@ if(isset($_GET['doi_id'])){
         <script>
             new Vue({
                 el: '#myTaskTable',
-                data () {
+                data () { 
                     return {
                       info: null
                     }
